@@ -1,3 +1,5 @@
+# saep_gerenciamento_estoque/settings.py
+
 import os
 from datetime import timedelta
 from pathlib import Path
@@ -17,6 +19,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'rest_framework',
+    'rest_framework_simplejwt', # 🚨 Adicione esta linha se não estiver lá 🚨
     'corsheaders',
     'django_filters',
 
@@ -40,13 +43,6 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'saep_gerenciamento_estoque.urls'
 
-# saep_backend/settings.py
-
-# ... (código anterior) ...
-
-ROOT_URLCONF = 'saep_gerenciamento_estoque.urls'
-
-# 🚨 ADICIONE ESTE BLOCO 🚨
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -62,18 +58,23 @@ TEMPLATES = [
         },
     },
 ]
-# ... (o restante do seu settings.py, como WSGI_APPLICATION, DATABASES, etc.) ...
 
-WSGI_APPLICATION = 'saep_backend.wsgi.application'
+WSGI_APPLICATION = 'saep_gerenciamento_estoque.wsgi.application'
 
+# Configurações de Internacionalização e Fuso Horário
+LANGUAGE_CODE = 'en-us'
+TIME_ZONE = 'America/Sao_Paulo'
+USE_I18N = True
+USE_TZ = True
+
+# 🚨 CORREÇÃO ESSENCIAL: Adicionar STATIC_URL para resolver o erro 'ImproperlyConfigured'
+STATIC_URL = '/static/' 
+
+# 🚨 CORREÇÃO ESSENCIAL: Mudar para o banco de dados SQLite
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'saep_db', 
-        'USER': 'root',     
-        'PASSWORD': 'senai', 
-        'HOST': '127.0.0.1',
-        'PORT': '3306',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
 

@@ -14,6 +14,8 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+# saep_gerenciamento_estoque/urls.py
+
 from django.contrib import admin
 from django.urls import path, include
 from rest_framework_simplejwt.views import (
@@ -24,10 +26,10 @@ from rest_framework_simplejwt.views import (
 urlpatterns = [
     path('admin/', admin.site.urls),
     
-    # Rotas de Autenticação JWT (Entrega 4)
+    # Rotas de Autenticação JWT (PÚBLICAS, para login e refresh de token)
     path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     
-    # Rotas da Aplicação Core (Estoque)
+    # Rotas da Aplicação Core 'api' (PROTEGIDAS pela autenticação JWT)
     path('api/', include('api.urls')),
 ]
