@@ -1,5 +1,0 @@
-djangorestframework
-djangorestframework-simplejwt
-mysqlclient          
-django-cors-headers  
-django-filter     
